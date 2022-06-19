@@ -7,7 +7,7 @@ public class Main {
         System.out.print(calc(input));
 
     }
-//для проверки на идентичность записи чисел
+    //для проверки на идентичность записи чисел
     public static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
@@ -86,7 +86,7 @@ public class Main {
         return result;
     }
     public static String calc(String input){
-         //вводим-считываем пример, который необходимо решить
+        //вводим-считываем пример, который необходимо решить
         Scanner scanner = new Scanner(System.in);;
         String str = scanner.nextLine();
         char[] oper = new char[10]; //здесь будут введённые данные посимвольно
@@ -117,7 +117,7 @@ public class Main {
             if (check > 1) {
                 throw new InputMismatchException("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             } else throw new InputMismatchException("throws Exception //т.к. строка не является математической операцией");
-        }  // проверка на соответствие условия количества операторов
+        } // проверка на соответствие условия количества операторов
 
         System.out.println(str);
         String operString = String.valueOf(oper);
@@ -145,7 +145,7 @@ public class Main {
         if (nom1 < 0 && nom2 < 0) {
             for (int i = 0; i<2; i++){
                 int ch = Integer.parseInt (arrOperand[i].trim ());
-                if (ch > 10) {
+                if (ch> 10) {
                     throw new InputMismatchException("Неверный формат данных");
                 } //проверка на величину входных чисел (не больше 10)
             }
