@@ -118,8 +118,6 @@ public class Main {
                 throw new InputMismatchException("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             } else throw new InputMismatchException("throws Exception //т.к. строка не является математической операцией");
         } // проверка на соответствие условия количества операторов
-
-        System.out.println(str);
         String operString = String.valueOf(oper);
         String[] arrOperand = str.split("[-+*/]"); //массив чисел из строки
         arrOperand[0] = arrOperand[0].trim();
