@@ -86,10 +86,9 @@ public class Main {
         return result;
     }
     public static String calc(String input){
-        Scanner eq = new Scanner(System.in); //вводим-считываем пример, который необходимо решить
-        String str = eq.next();
-        eq.close();
-        str = str.trim(); //убрать пробелы
+         //вводим-считываем пример, который необходимо решить
+        Scanner scanner = new Scanner(System.in);;
+        String str = scanner.nextLine();
         char[] oper = new char[10]; //здесь будут введённые данные посимвольно
         char operation = ' ';
         int check = 0;
@@ -119,9 +118,16 @@ public class Main {
                 throw new InputMismatchException("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             } else throw new InputMismatchException("throws Exception //т.к. строка не является математической операцией");
         }  // проверка на соответствие условия количества операторов
+
+        System.out.println(str);
         String operString = String.valueOf(oper);
         String[] arrOperand = str.split("[-+*/]"); //массив чисел из строки
-        int check2 = 0;
+        arrOperand[0] = arrOperand[0].trim();
+        arrOperand[1] = arrOperand[1].trim();
+        if (arrOperand[0].indexOf(" ") != -1 || arrOperand[1].indexOf(" ") != -1) {
+            throw new InputMismatchException("Неверный формат данных");
+        }
+        int check2 = 0; //для проверки однотипности данных
         for (int i = 0; i<2; i++) {
             if (isNumeric(arrOperand[i]) == false) {
                 check2++;
@@ -131,14 +137,18 @@ public class Main {
             throw new InputMismatchException("т.к. используются одновременно разные системы счисления");
         }
         String numb0 = arrOperand[0];
-        String numb1 = arrOperand[1];
+        String numb2 = arrOperand[1];
+        String numb1 = numb2.trim();
         int nom1 = romanToNumber(numb0);
         int nom2 = romanToNumber(numb1);
         int result = 0;
-        if (nom1 > 10 || nom2 > 10) {
-            throw new InputMismatchException("Неверный формат данных");
-        }
         if (nom1 < 0 && nom2 < 0) {
+            for (int i = 0; i<2; i++){
+                int ch = Integer.parseInt (arrOperand[i].trim ());
+                if (ch > 10) {
+                    throw new InputMismatchException("Неверный формат данных");
+                } //проверка на величину входных чисел (не больше 10)
+            }
             result = 0;
         } else {
             if (min > 0) {
