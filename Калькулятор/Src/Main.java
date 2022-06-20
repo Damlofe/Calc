@@ -155,7 +155,7 @@ public class Main {
                 if (nom2 < nom1) {
                     result = calculated(nom1, nom2, operation);
                     String resultRoman = roman(result);
-                    System.out.print(resultRoman);
+                    return (resultRoman);
                 } else throw new InputMismatchException("т.к. в римской системе нет отрицательных чисел и 0");
             } else { result = calculated(nom1, nom2, operation);
                 if (result == 0) {
@@ -164,7 +164,5 @@ public class Main {
                 String resultRoman = roman(result);
                 return (resultRoman); }
         }
-
-        return String.valueOf(result);
     }
 }
