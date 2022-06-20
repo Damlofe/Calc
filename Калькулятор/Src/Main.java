@@ -158,6 +158,9 @@ public class Main {
                     System.out.print(resultRoman);
                 } else throw new InputMismatchException("т.к. в римской системе нет отрицательных чисел и 0");
             } else { result = calculated(nom1, nom2, operation);
+                if (result == 0) {
+                    throw new InputMismatchException("т.к. в римской системе нет отрицательных чисел и 0");
+                }
                 String resultRoman = roman(result);
                 return (resultRoman); }
         }
