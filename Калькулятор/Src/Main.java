@@ -18,39 +18,39 @@ public class Main {
     }
 
     private static String roman (int numArab) {
-        String[] rom = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+        String[] rom = {"0","I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
                 "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
                 "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
                 "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
                 "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
                 "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
                 "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
-        final String s = rom[numArab];
-        return s;
+        return rom[numArab];
     }
 
     private static int romanToNumber (String roman) {
         try {
-            if (roman.equals("I")) {
-                return 1;
-            } else if (roman.equals("II")) {
-                return 2;
-            } else if (roman.equals("III")) {
-                return 3;
-            } else if (roman.equals("IV")) {
-                return 4;
-            } else if (roman.equals("V")) {
-                return 5;
-            } else if (roman.equals("VI")) {
-                return 6;
-            } else if (roman.equals("VII")) {
-                return 7;
-            } else if (roman.equals("VIII")) {
-                return 8;
-            } else if (roman.equals("IX")) {
-                return 9;
-            } else if (roman.equals("X")) {
-                return 10;
+            switch (roman) {
+                case "I":
+                    return 1;
+                case "II":
+                    return 2;
+                case "III":
+                    return 3;
+                case "IV":
+                    return 4;
+                case "V":
+                    return 5;
+                case "VI":
+                    return 6;
+                case "VII":
+                    return 7;
+                case "VIII":
+                    return 8;
+                case "IX":
+                    return 9;
+                case "X":
+                    return 10;
             }
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Неверный формат данных");
@@ -81,13 +81,13 @@ public class Main {
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Не верный знак операции");
+                throw new IllegalArgumentException("Неверный знак операции");
         }
         return result;
     }
     public static String calc(String input){
         //вводим-считываем пример, который необходимо решить
-        Scanner scanner = new Scanner(System.in);;
+        Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         char[] oper = new char[10]; //здесь будут введённые данные посимвольно
         char operation = ' ';
@@ -118,16 +118,15 @@ public class Main {
                 throw new InputMismatchException("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
             } else throw new InputMismatchException("throws Exception //т.к. строка не является математической операцией");
         } // проверка на соответствие условия количества операторов
-        String operString = String.valueOf(oper);
         String[] arrOperand = str.split("[-+*/]"); //массив чисел из строки
         arrOperand[0] = arrOperand[0].trim();
         arrOperand[1] = arrOperand[1].trim();
-        if (arrOperand[0].indexOf(" ") != -1 || arrOperand[1].indexOf(" ") != -1) {
+        if (arrOperand[0].contains(" ") || arrOperand[1].contains(" ")) {
             throw new InputMismatchException("Неверный формат данных");
         }
         int check2 = 0; //для проверки однотипности данных
         for (int i = 0; i<2; i++) {
-            if (isNumeric(arrOperand[i]) == false) {
+            if (!isNumeric(arrOperand[i])) {
                 check2++;
             }
         }
@@ -147,22 +146,22 @@ public class Main {
                     throw new InputMismatchException("Неверный формат данных");
                 } //проверка на величину входных чисел (не больше 10)
             }
-            result = 0;
+            nom1 = Integer.parseInt(numb0);
+            nom2 = Integer.parseInt(numb1);
+            result = calculated(nom1, nom2, operation);
+            return String.valueOf(result);
         } else {
             if (min > 0) {
-                if (nom2 <= nom1) {
+                if (nom2 < nom1) {
                     result = calculated(nom1, nom2, operation);
                     String resultRoman = roman(result);
                     System.out.print(resultRoman);
-                } else throw new InputMismatchException("т.к. в римской системе нет отрицательных чисел");
+                } else throw new InputMismatchException("т.к. в римской системе нет отрицательных чисел и 0");
             } else { result = calculated(nom1, nom2, operation);
                 String resultRoman = roman(result);
-                System.out.print(resultRoman); }
+                return (resultRoman); }
         }
-        nom1 = Integer.parseInt(numb0);
-        nom2 = Integer.parseInt(numb1);
-        result = calculated(nom1, nom2, operation);
-        String itog = String.valueOf(result);
-        return itog;
+
+        return String.valueOf(result);
     }
 }
